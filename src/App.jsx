@@ -267,7 +267,7 @@ const HomepageView = () => {
                     <div className="aspect-[3/4] w-full max-w-md mx-auto bg-white p-4 shadow-xl rotate-[-2deg]">
                         <img
                             src="https://images.unsplash.com/photo-1552697676-e88931168fec?q=80&w=1500&auto=format&fit=crop"
-                            alt="Alex, zertifizierter Mental Coach und Achtsamkeitstrainer"
+                            alt="David, zertifizierter Mental Coach und Achtsamkeitstrainer"
                             className="w-full h-full object-cover"
                         />
                     </div>
@@ -277,7 +277,7 @@ const HomepageView = () => {
                         Über Mich & Meine Expertise
                     </span>
                     <h2 className="font-heading text-4xl md:text-5xl font-light text-[#121F33] leading-tight">
-                        Hi, ich bin Alex.<br />
+                        Hi, ich bin David.<br />
                         <span className="font-semibold">Dein zertifizierter Coach.</span>
                     </h2>
                     <div className="space-y-4 text-[#2E476B] font-light leading-relaxed">
