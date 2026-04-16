@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, Brain, Target, Compass, Star, ChevronRight, Menu, X, Check, HelpCircle, Quote, Phone, Mail, User } from 'lucide-react';
 
 export default function App() {
-    const [activeTab, setActiveTab] = useState('homepage');
+    const [activeTab] = useState('homepage');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     // Inject Custom Fonts
