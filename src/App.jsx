@@ -22,57 +22,68 @@ export default function App() {
     .font-body { font-family: 'Plus Jakarta Sans', sans-serif; }
   `;
 
+    const menuItems = ['Philosophie', 'Angebot', 'Über mich', 'FAQ', 'Kontakt'];
+
     return (
         <div className="min-h-screen bg-[#F8F6F0] font-body text-[#121F33]">
             <style>{fontStyles}</style>
 
-            {/* Top Navigation / Mode Switcher (For Demo Purposes) */}
-            <div className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-[#F2E8D3]">
-                <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-                    <div className="font-heading font-bold text-xl text-[#121F33]">
-                        MIND<span className="text-[#C5A059]">COACH</span>
+            {/* Top Navigation */}
+            <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#F2E8D3]">
+                <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                    <div className="font-heading font-bold text-xl text-[#121F33] shrink-0">
+                        DAVID<span className="text-[#C5A059]">SIMON</span>
                     </div>
 
-                    <div className="hidden md:flex space-x-2 bg-[#F8F6F0] p-1 rounded-full border border-[#F2E8D3]">
-                        <button
-                            onClick={() => setActiveTab('homepage')}
-                            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${activeTab === 'homepage' ? 'bg-[#121F33] text-white shadow-sm' : 'text-[#2E476B] hover:text-[#121F33]'}`}
-                        >
-                            Homepage Mockup
-                        </button>
-                        <button
-                            onClick={() => setActiveTab('design-system')}
-                            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${activeTab === 'design-system' ? 'bg-[#121F33] text-white shadow-sm' : 'text-[#2E476B] hover:text-[#121F33]'}`}
-                        >
-                            Design System
+                    {/* Center Navigation */}
+                    <nav className="hidden lg:flex flex-1 justify-center gap-8 items-center" aria-label="Hauptnavigation">
+                        {menuItems.slice(0, 3).map((item, idx) => (
+                            <a key={idx} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-[#2E476B] hover:text-[#C5A059] font-medium transition-colors text-sm uppercase tracking-wider">
+                                {item}
+                            </a>
+                        ))}
+                    </nav>
+
+                    {/* Right Navigation & CTA */}
+                    <div className="hidden lg:flex gap-8 items-center shrink-0">
+                        {menuItems.slice(3).map((item, idx) => (
+                            <a key={idx} href={`#${item.toLowerCase()}`} className="text-[#2E476B] hover:text-[#C5A059] font-medium transition-colors text-sm uppercase tracking-wider">
+                                {item}
+                            </a>
+                        ))}
+                        <button className="bg-[#121F33] text-white px-6 py-3 rounded-none hover:bg-[#2E476B] transition-colors font-medium">
+                            Erstgespräch buchen
                         </button>
                     </div>
 
-                    <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+                    <button className="lg:hidden shrink-0" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
                         {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                     </button>
                 </div>
 
                 {/* Mobile Menu */}
                 {mobileMenuOpen && (
-                    <div className="md:hidden bg-white px-6 py-4 border-b border-[#F2E8D3] flex flex-col gap-4">
-                        <button
-                            onClick={() => { setActiveTab('homepage'); setMobileMenuOpen(false); }}
-                            className={`text-left font-medium ${activeTab === 'homepage' ? 'text-[#C5A059]' : 'text-[#121F33]'}`}
-                        >
-                            Homepage Mockup
-                        </button>
-                        <button
-                            onClick={() => { setActiveTab('design-system'); setMobileMenuOpen(false); }}
-                            className={`text-left font-medium ${activeTab === 'design-system' ? 'text-[#C5A059]' : 'text-[#121F33]'}`}
-                        >
-                            Design System
-                        </button>
+                    <div className="lg:hidden bg-white px-6 py-6 border-b border-[#F2E8D3] flex flex-col gap-6 shadow-xl">
+                        {menuItems.map((item, idx) => (
+                            <a 
+                                key={idx} 
+                                href={`#${item.toLowerCase().replace(' ', '-')}`} 
+                                onClick={() => setMobileMenuOpen(false)}
+                                className="text-left font-medium text-[#121F33] text-lg hover:text-[#C5A059] transition-colors"
+                            >
+                                {item}
+                            </a>
+                        ))}
+                        <div className="pt-4 border-t border-[#F2E8D3]">
+                            <button className="w-full bg-[#121F33] text-white px-6 py-4 rounded-none hover:bg-[#2E476B] transition-colors font-medium text-lg">
+                                Erstgespräch buchen
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
 
-            <div className="pt-16">
+            <div className="pt-20">
                 {activeTab === 'homepage' ? <HomepageView /> : <DesignSystemView />}
             </div>
         </div>
@@ -83,32 +94,8 @@ export default function App() {
    HOMEPAGE MOCKUP
 ========================================= */
 const HomepageView = () => {
-    const menuItems = ['Philosophie', 'Angebot', 'Über mich', 'FAQ', 'Kontakt'];
-
     return (
         <main itemScope itemType="https://schema.org/WebPage">
-            {/* Fake Site Header */}
-            <header className="py-8 px-6 md:px-12 max-w-7xl mx-auto flex justify-between items-center mt-8">
-                <nav className="hidden md:flex gap-8 items-center" aria-label="Hauptnavigation">
-                    {menuItems.slice(0, 3).map((item, idx) => (
-                        <a key={idx} href={`#${item.toLowerCase()}`} className="text-[#2E476B] hover:text-[#C5A059] font-medium transition-colors text-sm uppercase tracking-wider">
-                            {item}
-                        </a>
-                    ))}
-                </nav>
-
-                <div className="hidden md:flex gap-8 items-center">
-                    {menuItems.slice(3).map((item, idx) => (
-                        <a key={idx} href={`#${item.toLowerCase()}`} className="text-[#2E476B] hover:text-[#C5A059] font-medium transition-colors text-sm uppercase tracking-wider">
-                            {item}
-                        </a>
-                    ))}
-                    <button className="bg-[#121F33] text-white px-6 py-3 rounded-none hover:bg-[#2E476B] transition-colors font-medium">
-                        Erstgespräch buchen
-                    </button>
-                </div>
-            </header>
-
             {/* Hero Section - SEO Optimized H1 & Description */}
             <section className="py-24 md:py-32 px-6 md:px-12 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
                 <div className="space-y-10">
@@ -622,7 +609,7 @@ const DesignSystemView = () => {
                         <div className="bg-[#F8F6F0] p-8 border border-[#F2E8D3]">
                             <header className="bg-white/90 px-6 py-4 flex justify-between items-center shadow-sm">
                                 <div className="font-heading font-bold text-xl text-[#121F33]">
-                                    MIND<span className="text-[#C5A059]">COACH</span>
+                                    DAVID<span className="text-[#C5A059]">SIMON</span>
                                 </div>
                                 <div className="hidden md:flex gap-8 items-center">
                                     <span className="text-[#C5A059] font-medium text-sm uppercase tracking-wider cursor-pointer border-b-2 border-[#C5A059] pb-1">Start</span>
