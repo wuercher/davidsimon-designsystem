@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, Brain, Target, Compass, Star, ChevronRight, Menu, X, Check, HelpCircle, Quote, Phone, Mail, User } from 'lucide-react';
 
 export default function App() {
-    const [activeTab] = useState('homepage');
+    const [activeTab, setActiveTab] = useState('homepage');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     // Inject Custom Fonts
@@ -31,27 +31,43 @@ export default function App() {
             {/* Top Navigation */}
             <div className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#F2E8D3]">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <div className="font-heading font-bold text-xl text-[#121F33] shrink-0">
+                    <button onClick={() => setActiveTab('homepage')} className="font-heading font-bold text-xl text-[#121F33] shrink-0 hover:opacity-80 transition-opacity">
                         DAVID<span className="text-[#C5A059]">SIMON</span>
-                    </div>
+                    </button>
 
                     {/* Center Navigation */}
                     <nav className="hidden lg:flex flex-1 justify-center gap-8 items-center" aria-label="Hauptnavigation">
                         {menuItems.slice(0, 3).map((item, idx) => (
-                            <a key={idx} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-[#2E476B] hover:text-[#C5A059] font-medium transition-colors text-sm uppercase tracking-wider">
+                            <a 
+                                key={idx} 
+                                href={`#${item.toLowerCase().replace(' ', '-')}`} 
+                                onClick={() => setActiveTab('homepage')}
+                                className="text-[#2E476B] hover:text-[#C5A059] font-medium transition-colors text-sm uppercase tracking-wider"
+                            >
                                 {item}
                             </a>
                         ))}
                     </nav>
 
                     {/* Right Navigation & CTA */}
-                    <div className="hidden lg:flex gap-8 items-center shrink-0">
+                    <div className="hidden lg:flex gap-6 items-center shrink-0">
                         {menuItems.slice(3).map((item, idx) => (
-                            <a key={idx} href={`#${item.toLowerCase()}`} className="text-[#2E476B] hover:text-[#C5A059] font-medium transition-colors text-sm uppercase tracking-wider">
+                            <a 
+                                key={idx} 
+                                href={`#${item.toLowerCase()}`} 
+                                onClick={() => setActiveTab('homepage')}
+                                className="text-[#2E476B] hover:text-[#C5A059] font-medium transition-colors text-sm uppercase tracking-wider"
+                            >
                                 {item}
                             </a>
                         ))}
-                        <button className="bg-[#121F33] text-white px-6 py-3 rounded-none hover:bg-[#2E476B] transition-colors font-medium">
+                        <button 
+                            onClick={() => setActiveTab('designsystem')}
+                            className={`font-medium transition-colors text-sm uppercase tracking-wider ${activeTab === 'designsystem' ? 'text-[#C5A059]' : 'text-[#2E476B] hover:text-[#C5A059]'}`}
+                        >
+                            Designsystem
+                        </button>
+                        <button className="bg-[#121F33] text-white px-6 py-3 rounded-none hover:bg-[#2E476B] transition-colors font-medium ml-2">
                             Erstgespräch buchen
                         </button>
                     </div>
@@ -68,12 +84,18 @@ export default function App() {
                             <a 
                                 key={idx} 
                                 href={`#${item.toLowerCase().replace(' ', '-')}`} 
-                                onClick={() => setMobileMenuOpen(false)}
+                                onClick={() => { setActiveTab('homepage'); setMobileMenuOpen(false); }}
                                 className="text-left font-medium text-[#121F33] text-lg hover:text-[#C5A059] transition-colors"
                             >
                                 {item}
                             </a>
                         ))}
+                        <button 
+                            onClick={() => { setActiveTab('designsystem'); setMobileMenuOpen(false); }}
+                            className="text-left font-medium text-[#121F33] text-lg hover:text-[#C5A059] transition-colors"
+                        >
+                            Designsystem
+                        </button>
                         <div className="pt-4 border-t border-[#F2E8D3]">
                             <button className="w-full bg-[#121F33] text-white px-6 py-4 rounded-none hover:bg-[#2E476B] transition-colors font-medium text-lg">
                                 Erstgespräch buchen
