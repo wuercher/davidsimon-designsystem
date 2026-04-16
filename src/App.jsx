@@ -142,7 +142,7 @@ const HomepageView = () => {
                 </div>
                 <div className="relative">
                     {/* SEO Optimized Image with explicit alt tag */}
-                    <div className="w-full aspect-[4/5] bg-[#F2E8D3] rounded-tl-full rounded-br-full overflow-hidden relative shadow-2xl">
+                    <div className="w-full aspect-square bg-[#F2E8D3] rounded-full overflow-hidden relative shadow-2xl">
                         <div className="absolute inset-0 bg-gradient-to-tr from-[#121F33]/10 to-transparent"></div>
                         <img
                             src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?q=80&w=2000&auto=format&fit=crop"
